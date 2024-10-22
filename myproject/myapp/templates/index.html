@@ -1,0 +1,333 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Smart Health and Wellness Monitoring System</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+        <style>
+            body {
+                background-color: #f4f6f9;
+                font-family: 'Arial', sans-serif;
+            }
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 30px 15px;
+            }
+            .hero-section {
+                background: linear-gradient(rgba(0, 123, 255, 0.6), rgba(40, 167, 69, 0.6)), url('https://source.unsplash.com/1600x900/?health,wellness');
+                background-size: cover;
+                background-position: center;
+                color: white;
+                padding: 80px 0;
+                text-align: center;
+                border-radius: 15px;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            }
+            h1 {
+                font-size: 3em;
+                margin-bottom: 10px;
+                font-weight: bold;
+            }
+            p {
+                font-size: 1.1em;
+                margin-bottom: 30px;
+                line-height: 1.5;
+            }
+            .btn-login {
+                background-color: #28a745;
+                color: white;
+                padding: 12px 25px;
+                font-size: 16px;
+                border-radius: 5px;
+                border: none;
+                cursor: pointer;
+                transition: background-color 0.3s ease, transform 0.2s ease;
+            }
+            .btn-login:hover {
+                background-color: #218838;
+                transform: scale(1.05);
+            }
+            .section {
+                padding: 60px 0;
+            }
+            .section h2 {
+                color: #2c3e50;
+                margin-bottom: 30px;
+                font-size: 2.5em;
+                position: relative;
+            }
+            .section h2::after {
+                content: '';
+                position: absolute;
+                width: 60px;
+                height: 4px;
+                background-color: #28a745;
+                top:-20px;
+                /* bottom: -10px; */
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .icon-box {
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                text-align: center;
+            }
+            .icon-box:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+            }
+            .icon-box i {
+                font-size: 3em;
+                color: #28a745;
+                margin-bottom: 15px;
+            }
+            .video-section {
+                padding: 40px 0;
+                background-color: #f8f9fa;
+                text-align: center;
+            }
+            .video-section iframe {
+                width: 80%;
+                height: 400px;
+                border-radius: 15px;
+                border: none;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            }
+            .accordion .card-header {
+                background-color: #259fd8; /* Updated color */
+                color: white;
+                cursor: pointer;
+            }
+            .accordion .card-header:hover {
+                background-color: #259fd8; /* Updated hover color */
+            }
+            .counter {
+                font-size: 3em;
+                color: #28a745;
+                font-weight: bold;
+            }
+            .scroll-to-top {
+                position: fixed;
+                bottom: 30px;
+                right: 30px;
+                background-color: #28a745;
+                color: white;
+                border: none;
+                padding: 10px;
+                border-radius: 50%;
+                font-size: 20px;
+                cursor: pointer;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+                transition: background-color 0.3s ease, transform 0.3s ease;
+                z-index: 1000;
+            }
+            .scroll-to-top:hover {
+                background-color: #218838;
+                transform: translateY(-5px);
+            }
+            .footer-section {
+                background-color: #343a40; /* Updated footer color */
+                color: white;
+                padding: 20px 0;
+            }
+            .social-media-links a {
+                font-size: 1.5em;
+                margin: 0 10px;
+                color: white;
+                transition: color 0.3s ease;
+            }
+            .social-media-links a:hover {
+                color: #d4d4d4;
+            }
+        </style>
+    </head>
+    <body>
+
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <div class="container">
+                <h1>Smart Health & Wellness Monitoring</h1>
+                <p>Empowering you with real-time health insights for a healthier tomorrow.</p>
+                <button class="btn-login" onclick="redirectToLogin()">Get Started <i class="fas fa-sign-in-alt"></i></button>
+            </div>
+        </div>
+
+        <!-- About Section -->
+        <div class="section" id="about">
+            <div class="container">
+                <h2>About Our System</h2>
+                <p>Our Smart Health and Wellness Monitoring System leverages cutting-edge artificial intelligence and data-driven insights to provide comprehensive real-time health monitoring and tracking. With our advanced technology, you gain access to personalized recommendations tailored specifically to your unique health profile. This innovative system not only empowers you to make informed decisions about your health but also helps you proactively manage your wellness journey. Experience the future of health monitoring, where real-time data transforms your health goals into reality!
+                </p>
+            </div>
+        </div>
+
+        <!-- Services Section -->
+        <div class="section services" id="services">
+            <div class="container">
+                <h2>Our Services</h2>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="icon-box">
+                            <i class="fas fa-heartbeat"></i>
+                            <h4>Real-Time Monitoring</h4>
+                            <p>Track your health metrics in real-time using wearable devices and sensors integrated with our system.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="icon-box">
+                            <i class="fas fa-brain"></i>
+                            <h4>AI-Based Analysis</h4>
+                            <p>Receive personalized health insights and recommendations based on AI-driven analysis of your data.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="icon-box">
+                            <i class="fas fa-user-shield"></i>
+                            <h4>24/7 Support</h4>
+                            <p>Our team is available around the clock to assist you with any issues or questions you may have.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video Section -->
+        <div class="video-section">
+            <div class="container">
+                <h2>Watch How It Works</h2>
+                <br>
+                <iframe src="https://www.youtube.com/embed/jh5U5BnpGN8?si=0CFKtAlACRFbklgX" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <!-- Statistics Section -->
+        <div class="section" id="stats">
+            <div class="container">
+                <h2>Our Achievements</h2>
+                <div class="row text-center">
+                    <div class="col-md-3">
+                        <div class="counter" id="patients-counter">1500+</div>
+                        <p>Happy Patients</p>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="counter" id="data-analyzed">120TB+</div>
+                        <p>Data Analyzed</p>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="counter" id="support-hours">24/7</div>
+                        <p>Support Hours</p>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="counter" id="countries-covered">30+</div>
+                        <p>Countries Covered</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="section" id="faq">
+            <div class="container">
+                <h2>Frequently Asked Questions</h2>
+                <div id="faqAccordion" class="accordion">
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link text-white" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    What is the Smart Health & Wellness Monitoring System?
+                                </button>
+                            </h5>
+                        </div>
+
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#faqAccordion">
+                            <div class="card-body">
+                                It is an advanced system that tracks your health metrics using AI and real-time data analytics to offer personalized recommendations.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header" id="headingTwo">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link text-white collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    How does the real-time monitoring work?
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#faqAccordion">
+                            <div class="card-body">
+                                Wearable devices capture your health metrics and transmit the data to our system, which analyzes it in real-time.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header" id="headingThree">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link text-white collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    Can I integrate my wearable device?
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#faqAccordion">
+                            <div class="card-body">
+                                Yes, our system is compatible with a wide range of wearable devices including smartwatches and fitness trackers.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Section -->
+        <footer class="footer-section">
+            <div class="container text-center">
+                <p>&copy; 2024 Smart Health Monitoring. All Rights Reserved.</p>
+                <div class="social-media-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </footer>
+
+        <button class="scroll-to-top" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></button>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script>
+            function redirectToLogin() { // Test if the function works
+                window.location.href = '/login'; // Update with your actual login page URL
+            }
+            function scrollToTop() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            // Simulating dynamic counters
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                let count = 0;
+                const target = +counter.innerText.replace(/\D/g, '');
+                const increment = target / 200; // Adjust speed
+                const updateCounter = () => {
+                    count += increment;
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count) + '+';
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.innerText = target + '+';
+                    }
+                };
+                updateCounter();
+            });
+        </script>
+    </body>
+    </html>

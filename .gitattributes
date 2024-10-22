@@ -1,0 +1,12 @@
+# Handle line endings
+* text=auto
+
+# Ensure specific file types have LF endings
+*.py eol=lf
+*.sh eol=lf
+*.html eol=lf
+*.css eol=lf
+
+# Ignore binary files
+*.jpg binary
+*.png binary
