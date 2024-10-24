@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 import requests
 from firebase_admin import auth
+from django.http import HttpResponse
+import firebase_config
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     return render(request, 'index.html')
@@ -61,4 +64,28 @@ def signup(request):
     return render(request, 'signup.html')
 
 def home(request):
-    return render(request, 'home.html')
+    username = request.user.username
+    return render(request, 'home.html', {'username': username})
+
+import requests
+from django.shortcuts import render
+from django.conf import settings
+
+def forgot_password(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        api_key = 'AIzaSyAX9CLiAa1kqUJXvqWTcENJ2JAz0NwlPBM'  # Replace with your Firebase API Key
+
+        url = f'https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key={api_key}'
+        data = {
+            'requestType': 'PASSWORD_RESET',
+            'email': email
+        }
+        try:
+            response = requests.post(url, json=data)
+            response.raise_for_status()  # Raise an error if status is not 200
+            return render(request, 'password_reset_email_sent.html')
+        except requests.exceptions.RequestException as e:
+            error_message = e.response.json().get('error', {}).get('message', 'Unknown error occurred')
+            return render(request, 'forgot_password.html', {'error': error_message})
+    return render(request, 'forgot_password.html')

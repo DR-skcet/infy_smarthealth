@@ -81,7 +81,7 @@
         </div>
 
         <div class="text-center forgot-password mt-3">
-            <a href="/reset-password">Forgot your password?</a>
+            <a href="{% url 'forgot_password' %}">Forgot your password?</a>
         </div>
 
         <div class="text-center signup-link mt-2">
@@ -92,9 +92,9 @@
     <!-- Load Firebase SDK -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
-        import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js";
+        import { getAuth, GoogleAuthProvider, signInWithRedirect, getRedirectResult } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-analytics.js";
-
+    
         // Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyAX9CLiAa1kqUJXvqWTcENJ2JAz0NwlPBM",
@@ -106,30 +106,29 @@
             appId: "1:82891358114:web:50f5d0e87e057b4d893cfb",
             measurementId: "G-R5HQQF6WQQ"
         };
-
+    
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
         const auth = getAuth(app);
-
-        // Sign in with Google function
+    
+        // Sign in with Google using redirect
         function signInWithGoogle() {
             console.log("Attempting to sign in with Google...");
             const provider = new GoogleAuthProvider();
-
-            signInWithPopup(auth, provider)
-                .then((result) => {
-                    console.log("Sign-in successful:", result);
-                    window.location.href = "/home"; // Redirect after successful login
+    
+            signInWithRedirect(auth, provider)
+                .then(() => {
+                    console.log("Redirecting to Google for sign-in...");
                 })
                 .catch((error) => {
                     console.error("Error during Google sign-in:", error);
                     const errorDiv = document.getElementById('error');
-
+    
                     if (errorDiv) {
                         // Clear previous error messages
                         errorDiv.innerHTML = "";
-
+    
                         // Display appropriate error message based on the error code
                         switch (error.code) {
                             case 'auth/popup-closed-by-user':
@@ -139,7 +138,7 @@
                                 errorDiv.innerHTML = "<p>Network error. Please check your internet connection and try again.</p>";
                                 break;
                             default:
-                                errorDiv.innerHTML = `<p>${error.message}</p>`; // Display general error message
+                                errorDiv.innerHTML = `<p>${error.message}</p>`;
                                 break;
                         }
                         errorDiv.style.display = "block"; // Show error message
@@ -148,7 +147,24 @@
                     }
                 });
         }
-
+    
+        // Handle the result of the Google redirect
+        getRedirectResult(auth)
+            .then((result) => {
+                if (result) {
+                    console.log("Google sign-in successful:", result);
+                    if (result.user) {
+                        console.log("User details:", result.user);
+                        window.location.href = "/home"; // Redirect after successful login
+                    }
+                } else {
+                    console.log("No user found after redirect.");
+                }
+            })
+            .catch((error) => {
+                console.error("Error after Google redirect sign-in:", error);
+            });
+    
         // Event listener for Google sign-in button
         document.addEventListener('DOMContentLoaded', function() {
             const googleButton = document.getElementById('googleSignInButton');
@@ -160,5 +176,6 @@
             }
         });
     </script>
+    
 </body>
 </html>
