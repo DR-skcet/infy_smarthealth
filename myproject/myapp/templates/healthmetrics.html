@@ -1,0 +1,346 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Metrics - Smart Health</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to bottom right, #e0f7fa, #ffffff);
+            color: #333;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            background-color: #004d40;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            background: white;
+            border-radius: 8px;
+            text-align: center; 
+        }
+
+        /* Card Styles */
+        .card {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-title {
+            font-size: 24px;
+            color: #004d40;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #e0f2f1;
+            padding-bottom: 5px;
+        }
+
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
+            padding: 10px;
+            background: #e0f2f1;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .metric:hover {
+            background-color: #b2dfdb;
+        }
+
+        .metric-name {
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .metric-value {
+            font-size: 22px;
+            font-weight: 700;
+            color: #00796b;
+        }
+
+        /* Charts */
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin: 30px auto; /* Centering the chart */
+            width: 90%; /* Ensure chart is responsive */
+            max-width: 800px;
+        }
+
+        /* Button Styles */
+        button {
+            background-color: #00796b;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #004d40;
+            transform: translateY(-2px);
+        }
+
+        /* Health Insights Section */
+        .insights {
+            background: #e8f5e9; /* Light green background */
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .insight-container {
+            display: flex;
+            flex-wrap: wrap; /* Allows cards to wrap on smaller screens */
+            justify-content: space-between; /* Space between cards */
+        }
+
+        .insight-card {
+            background: #ffffff; /* White background for each card */
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px;
+            flex: 1 1 calc(30% - 20px); /* Responsive card sizing */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .insight-card:hover {
+            transform: translateY(-5px); /* Slightly lift the card on hover */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .insight-icon {
+            font-size: 28px;
+            color: #43a047; /* Green color for icons */
+            margin-bottom: 10px;
+        }
+
+        .insight-content {
+            padding: 10px 0;
+        }
+
+        .insight-text {
+            font-size: 16px;
+            color: #555; /* Dark gray text color */
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .card {
+                padding: 15px;
+            }
+
+            .insight-card {
+                flex: 1 1 100%; /* Stack cards vertically on small screens */
+                margin: 5px 0; /* Margin adjustments for vertical stacking */
+            }
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<header>
+    <h1>Health Metrics</h1>
+</header>
+
+<div class="container">
+
+    <!-- Health Metrics Cards -->
+    <div class="card">
+        <div class="card-title">Daily Health Metrics</div>
+        <div class="metric">
+            <div class="metric-name">
+                <span class="metric-icon">❤️</span> Heart Rate
+            </div>
+            <span class="metric-value">72 bpm</span>
+        </div>
+        <div class="metric">
+            <div class="metric-name">
+                <span class="metric-icon">🩸</span> Blood Pressure
+            </div>
+            <span class="metric-value">120/80 mmHg</span>
+        </div>
+        <div class="metric">
+            <div class="metric-name">
+                <span class="metric-icon">🔥</span> Calories Burned
+            </div>
+            <span class="metric-value">500 kcal</span>
+        </div>
+        <div class="metric">
+            <div class="metric-name">
+                <span class="metric-icon">🚶‍♂️</span> Steps Taken
+            </div>
+            <span class="metric-value">8500 steps</span>
+        </div>
+        <div class="metric">
+            <div class="metric-name">
+                <span class="metric-icon">💤</span> Sleep Duration
+            </div>
+            <span class="metric-value">7 hrs</span>
+        </div>
+        <div class="metric">
+            <div class="metric-name">
+                <span class="metric-icon">🩸</span> Blood Oxygen Level
+            </div>
+            <span class="metric-value">98%</span>
+        </div>
+        <button id="editMetricsBtn">Edit Metrics</button>
+    </div>
+
+    <!-- Health Stats Chart -->
+    <div class="chart-container">
+        <canvas id="healthStatsChart"></canvas>
+    </div>
+
+    <!-- Health Insights -->
+    <div class="insights">
+        <div class="card-title">Health Insights</div>
+        <div class="insight-container">
+            <div class="insight-card">
+                <div class="insight-icon">❤️</div>
+                <div class="insight-content">
+                    <div class="insight-text">Your heart rate is within a healthy range. Keep up the good work!</div>
+                </div>
+            </div>
+            <div class="insight-card">
+                <div class="insight-icon">🍏</div>
+                <div class="insight-content">
+                    <div class="insight-text">Aim to maintain a balanced diet to optimize your calorie burn.</div>
+                </div>
+            </div>
+            <div class="insight-card">
+                <div class="insight-icon">💧</div>
+                <div class="insight-content">
+                    <div class="insight-text">Consider tracking your hydration levels to stay properly hydrated.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Health Recommendations -->
+    <div class="card">
+        <div class="card-title">Health Recommendations</div>
+        <p>Stay hydrated by drinking at least 2 liters of water a day.</p>
+        <p>Engage in at least 30 minutes of exercise daily.</p>
+        <button id="viewRecommendationsBtn">View More Recommendations</button>
+    </div>
+</div>
+
+<script>
+    // Chart.js Example for Health Stats
+    const ctx = document.getElementById('healthStatsChart').getContext('2d');
+    const healthStatsChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'],
+            datasets: [{
+                label: 'Heart Rate',
+                data: [70, 72, 75, 73, 74, 71, 69],
+                backgroundColor: 'rgba(76, 175, 80, 0.2)',
+                borderColor: 'rgba(76, 175, 80, 1)',
+                fill: true,
+                borderWidth: 2
+            },
+            {
+                label: 'Blood Pressure',
+                data: [120, 125, 122, 123, 121, 119, 120],
+                backgroundColor: 'rgba(244, 67, 54, 0.2)',
+                borderColor: 'rgba(244, 67, 54, 1)',
+                fill: true,
+                borderWidth: 2
+            },
+            {
+                label: 'Calories Burned',
+                data: [450, 500, 550, 480, 600, 700, 650],
+                backgroundColor: 'rgba(33, 150, 243, 0.2)',
+                borderColor: 'rgba(33, 150, 243, 1)',
+                fill: true,
+                borderWidth: 2
+            },
+            {
+                label: 'Steps Taken',
+                data: [8000, 8500, 9000, 10000, 9500, 11000, 10500],
+                backgroundColor: 'rgba(255, 193, 7, 0.2)',
+                borderColor: 'rgba(255, 193, 7, 1)',
+                fill: true,
+                borderWidth: 2
+            },
+            {
+                label: 'Sleep Duration',
+                data: [6, 7, 7, 8, 7, 6, 7],
+                backgroundColor: 'rgba(156, 39, 176, 0.2)',
+                borderColor: 'rgba(156, 39, 176, 1)',
+                fill: true,
+                borderWidth: 2
+            },
+            {
+                label: 'Blood Oxygen Level',
+                data: [97, 98, 99, 98, 97, 98, 99],
+                backgroundColor: 'rgba(0, 188, 212, 0.2)',
+                borderColor: 'rgba(0, 188, 212, 1)',
+                fill: true,
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Metrics'
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Days'
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

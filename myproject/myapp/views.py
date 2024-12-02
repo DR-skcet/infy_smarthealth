@@ -5,6 +5,7 @@ from firebase_admin import auth
 from django.http import HttpResponse
 import firebase_config
 from django.contrib.auth.decorators import login_required
+import json
 
 def index(request):
     return render(request, 'index.html')
@@ -67,10 +68,6 @@ def home(request):
     username = request.user.username
     return render(request, 'home.html', {'username': username})
 
-import requests
-from django.shortcuts import render
-from django.conf import settings
-
 def forgot_password(request):
     if request.method == 'POST':
         email = request.POST.get('email')
@@ -89,3 +86,21 @@ def forgot_password(request):
             error_message = e.response.json().get('error', {}).get('message', 'Unknown error occurred')
             return render(request, 'forgot_password.html', {'error': error_message})
     return render(request, 'forgot_password.html')
+
+def profile(request):
+    return render(request, 'profile.html')
+
+def healthmetrics(request):
+    return render(request, 'healthmetrics.html')
+
+def realtimemonitoring(request):
+    return render(request, 'real_time_monitoring.html')
+
+def healthadvice(request):
+    return render(request, 'health_advice.html')
+
+def alerts(request):
+    return render(request, 'alerts.html')
+
+def settings(request):
+    return render(request, 'settings.html')

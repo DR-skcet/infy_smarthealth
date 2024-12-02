@@ -1,0 +1,282 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Advice - Smart Health</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to bottom right, #e0f7fa, #ffffff);
+            color: #333;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            background-color: #004d40;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            background: white;
+            border-radius: 8px;
+        }
+
+        .advice-section, .metrics-section, .articles-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #00796b;
+            border-radius: 5px;
+            background: rgba(76, 175, 80, 0.1);
+        }
+
+        .advice-title, .metrics-title, .articles-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #00796b;
+        }
+
+        .advice-text, .metrics-text, .articles-text {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        /* Input Styles */
+        input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Button Styles */
+        button {
+            background-color: #00796b;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #004d40;
+            transform: translateY(-2px);
+        }
+
+        /* FAQ Styles */
+        .faq {
+            margin-top: 30px;
+            background: #e0f2f1;
+            border-radius: 5px;
+            padding: 15px;
+        }
+
+        .faq-item {
+            margin: 10px 0;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 5px;
+            background: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+
+        .faq-item:hover {
+            background-color: #b2dfdb;
+        }
+
+        .faq-answer {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background: #f1f8e9;
+            border-left: 3px solid #00796b;
+        }
+
+        /* Article Styles */
+        .article-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 10px 0;
+            color: #004d40;
+            text-decoration: none;
+            padding: 10px;
+            border: 1px solid #00796b;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.2s;
+            background: rgba(76, 175, 80, 0.1);
+        }
+
+        .article-link:hover {
+            background-color: #b2dfdb;
+            transform: translateY(-2px);
+        }
+
+        .article-icon {
+            margin-right: 10px;
+        }
+
+        .click-here {
+            font-weight: bold;
+            color: #00796b;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Health Advice</h1>
+</header>
+
+<div class="container">
+
+    <!-- User Metrics Input -->
+    <div class="metrics-section">
+        <div class="metrics-title">Input Your Health Metrics</div>
+        <input type="number" id="weight" placeholder="Weight (kg)">
+        <input type="number" id="height" placeholder="Height (cm)">
+        <select id="activity-level">
+            <option value="">Select Activity Level</option>
+            <option value="sedentary">Sedentary</option>
+            <option value="lightly_active">Lightly Active</option>
+            <option value="moderately_active">Moderately Active</option>
+            <option value="very_active">Very Active</option>
+        </select>
+        <button id="getAdviceBtn">Get Personalized Advice</button>
+    </div>
+
+    <!-- Personalized Health Advice -->
+    <div class="advice-section">
+        <div class="advice-title">Personalized Health Advice</div>
+        <div class="advice-text" id="personalizedAdvice">
+            Enter your metrics to receive tailored health advice!
+        </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="faq">
+        <div class="faq-item">What is a healthy heart rate?</div>
+        <div class="faq-answer">A normal resting heart rate for adults is between 60 and 100 beats per minute.</div>
+
+        <div class="faq-item">How can I lower my blood pressure?</div>
+        <div class="faq-answer">To lower blood pressure, reduce salt intake, maintain a healthy weight, and exercise regularly.</div>
+
+        <div class="faq-item">How many calories should I consume daily?</div>
+        <div class="faq-answer">Daily calorie needs vary, but an average adult requires about 2000-2500 calories per day.</div>
+
+        <div class="faq-item">How many steps should I take each day?</div>
+        <div class="faq-answer">Aim for at least 10,000 steps per day for optimal health benefits.</div>
+
+        <div class="faq-item">What should I do if I'm not sleeping well?</div>
+        <div class="faq-answer">Create a relaxing bedtime routine, limit screen time before bed, and keep your sleep environment comfortable.</div>
+    </div>
+
+    <!-- Tips Submission Form -->
+    <div class="metrics-section">
+        <div class="metrics-title">Share Your Health Tips</div>
+        <textarea id="tipInput" placeholder="Enter your health tip here..." rows="4" style="width: 100%;"></textarea>
+        <button id="submitTipBtn">Submit Tip</button>
+        <div id="tipConfirmation" style="margin-top: 10px; color: green;"></div>
+    </div>
+
+    <!-- Featured Articles Section -->
+    <div class="articles-section">
+        <div class="articles-title">Featured Articles</div>
+        <a href="https://www.webmd.com/diet/ss/slideshow-healthy-eating" class="article-link" target="_blank">
+            <span class="article-icon">🥗</span> Healthy Eating: 10 Tips
+            <span class="click-here">Click Here</span>
+        </a>
+        <a href="https://www.health.harvard.edu/exercise-and-fitness/the-30-minute-workout" class="article-link" target="_blank">
+            <span class="article-icon">🏃‍♂️</span> The 30-Minute Workout
+            <span class="click-here">Click Here</span>
+        </a>
+        <a href="https://www.cdc.gov/physicalactivity/basics/pa-health/index.htm" class="article-link" target="_blank">
+            <span class="article-icon">📚</span> Benefits of Physical Activity
+            <span class="click-here">Click Here</span>
+        </a>
+        <a href="https://www.mayoclinic.org/diseases-conditions/obesity/in-depth/weight-loss/art-20045495" class="article-link" target="_blank">
+            <span class="article-icon">⚖️</span> Weight Loss: A Guide
+            <span class="click-here">Click Here</span>
+        </a>
+        <a href="https://www.sleepfoundation.org/healthy-sleep/healthy-sleep-tips" class="article-link" target="_blank">
+            <span class="article-icon">💤</span> Healthy Sleep Tips
+            <span class="click-here">Click Here</span>
+        </a>
+    </div>
+</div>
+
+<script>
+    document.getElementById('getAdviceBtn').addEventListener('click', function() {
+        const weight = parseFloat(document.getElementById('weight').value);
+        const height = parseFloat(document.getElementById('height').value);
+        const activityLevel = document.getElementById('activity-level').value;
+
+        if (weight && height && activityLevel) {
+            const heightInMeters = height / 100;
+            const bmi = (weight / (heightInMeters * heightInMeters)).toFixed(2);
+            let advice = `Your BMI is ${bmi}. `;
+
+            if (bmi < 18.5) {
+                advice += "You are underweight. It's important to consume a balanced diet and consider speaking with a nutritionist.";
+            } else if (bmi >= 18.5 && bmi < 24.9) {
+                advice += "You have a healthy weight. Keep maintaining a balanced diet and regular physical activity!";
+            } else if (bmi >= 25 && bmi < 29.9) {
+                advice += "You are overweight. Consider incorporating more physical activity and a healthy diet.";
+            } else {
+                advice += "You are obese. It's highly recommended to consult with a healthcare provider for personalized advice.";
+            }
+
+            advice += ` Based on your activity level (${activityLevel}), try to engage in ${activityLevel === 'sedentary' ? 'some light activities or walking each day' : activityLevel === 'lightly_active' ? '30 minutes of moderate exercise most days' : activityLevel === 'moderately_active' ? 'more vigorous exercise several times a week' : 'daily rigorous activities or workouts'}.`;
+
+            document.getElementById('personalizedAdvice').innerText = advice;
+        } else {
+            document.getElementById('personalizedAdvice').innerText = "Please fill in all fields.";
+        }
+    });
+
+    document.getElementById('submitTipBtn').addEventListener('click', function() {
+        const tip = document.getElementById('tipInput').value;
+        if (tip) {
+            document.getElementById('tipConfirmation').innerText = "Tip submitted successfully! Thank you!";
+            document.getElementById('tipInput').value = ""; // Clear the input field
+        } else {
+            document.getElementById('tipConfirmation').innerText = "Please enter a health tip.";
+        }
+    });
+
+    // FAQ Toggle
+    document.querySelectorAll('.faq-item').forEach(item => {
+        item.addEventListener('click', () => {
+            const answer = item.nextElementSibling;
+            answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+        });
+    });
+</script>
+
+</body>
+</html>

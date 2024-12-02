@@ -1,0 +1,156 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alerts - Smart Health</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to bottom right, #e0f7fa, #ffffff);
+            color: #333;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            background-color: #004d40;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            background: white;
+            border-radius: 8px;
+        }
+
+        .alert {
+            background: #ffebee;
+            border-left: 6px solid #f44336;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            position: relative;
+            transition: background-color 0.3s;
+        }
+
+        .alert:hover {
+            background: #ffe0e0;
+        }
+
+        .alert h2 {
+            font-size: 20px;
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .alert p {
+            margin: 5px 0 0;
+            font-size: 16px;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #00796b;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+
+        .button:hover {
+            background-color: #004d40;
+            transform: translateY(-2px);
+        }
+
+        .personalized-advice {
+            margin-top: 30px;
+            padding: 15px;
+            background: #e8f5e9;
+            border-left: 6px solid #4caf50;
+        }
+
+        .personalized-advice h2 {
+            margin-top: 0;
+            font-size: 22px;
+            color: #2e7d32;
+        }
+
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Alerts</h1>
+</header>
+
+<div class="container">
+    <h2>Health Alerts</h2>
+    
+    <div class="alert">
+        <h2>🚨 Heart Rate Alert</h2>
+        <p>Your heart rate is above normal levels. Please consult your doctor.</p>
+    </div>
+    
+    <div class="alert">
+        <h2>💧 Hydration Reminder</h2>
+        <p>Don't forget to drink water! Stay hydrated for optimal health.</p>
+    </div>
+    
+    <div class="alert">
+        <h2>⚖️ Weight Management Reminder</h2>
+        <p>It's time to check your weight. Maintaining a healthy weight is crucial.</p>
+    </div>
+
+    <div class="alert">
+        <h2>🏃‍♂️ Activity Reminder</h2>
+        <p>Get moving! Aim for at least 30 minutes of exercise today.</p>
+    </div>
+
+    <div class="alert">
+        <h2>🛌 Sleep Reminder</h2>
+        <p>Remember to get at least 7 hours of sleep tonight for better health.</p>
+    </div>
+
+    <a href="#" class="button">Manage Alerts</a>
+
+    <div class="personalized-advice">
+        <h2>Personalized Health Advice</h2>
+        <p>Based on your recent activity, consider adding more fruits and vegetables to your diet for better health outcomes.</p>
+        <p>Stay active by incorporating short walks throughout your day!</p>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2024 Smart Health. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

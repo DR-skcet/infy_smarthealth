@@ -1,0 +1,233 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Monitoring - Smart Health</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to bottom right, #e0f7fa, #ffffff);
+            color: #333;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            background-color: #004d40;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            background: white;
+            border-radius: 8px;
+        }
+
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
+            padding: 10px;
+            background: #e0f2f1;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .metric-name {
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .metric-value {
+            font-size: 22px;
+            font-weight: 700;
+            color: #00796b;
+        }
+
+        /* Chart Styles */
+        .chart-container {
+            display: flex; /* Enable flexbox for centering */
+            justify-content: center; /* Center the chart horizontally */
+            align-items: center; /* Center the chart vertically if needed */
+            height: 400px; /* Maintain height */
+            margin: 30px auto; /* Centering the chart */
+            width: 90%; /* Ensure chart is responsive */
+        }
+
+        /* Button Styles */
+        button {
+            background-color: #00796b;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #004d40;
+            transform: translateY(-2px);
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<header>
+    <h1>Real-Time Monitoring</h1>
+</header>
+
+<div class="container">
+    <div class="metric">
+        <div class="metric-name">Heart Rate</div>
+        <span id="heartRate" class="metric-value">-- bpm</span>
+    </div>
+    <div class="metric">
+        <div class="metric-name">Blood Pressure</div>
+        <span id="bloodPressure" class="metric-value">-- mmHg</span>
+    </div>
+    <div class="metric">
+        <div class="metric-name">Calories Burned</div>
+        <span id="caloriesBurned" class="metric-value">-- kcal</span>
+    </div>
+    <div class="metric">
+        <div class="metric-name">Steps Taken</div>
+        <span id="stepsTaken" class="metric-value">-- steps</span>
+    </div>
+    <div class="metric">
+        <div class="metric-name">Sleep Duration</div>
+        <span id="sleepDuration" class="metric-value">-- hrs</span>
+    </div>
+
+    <!-- Live Data Chart -->
+    <div class="chart-container">
+        <canvas id="liveDataChart"></canvas>
+    </div>
+
+    <button id="refreshDataBtn">Refresh Data</button>
+</div>
+
+<script>
+    // Simulated real-time data for demonstration purposes
+    let heartRateData = [70, 72, 75, 73, 74];
+    let bloodPressureData = [120, 125, 122, 123, 121];
+    let caloriesBurnedData = [450, 500, 550, 480, 600];
+    let stepsTakenData = [8000, 8500, 9000, 10000, 9500];
+    let sleepDuration = 7; // Constant sleep duration
+
+    function updateMetrics() {
+        // Simulating real-time data updates
+        const heartRate = Math.floor(Math.random() * (80 - 60 + 1)) + 60; // Random heart rate between 60 and 80
+        const bloodPressure = `${Math.floor(Math.random() * (130 - 110 + 1)) + 110}/${Math.floor(Math.random() * (90 - 70 + 1)) + 70}`; // Random BP between 110/70 and 130/90
+        
+        // Gradually increasing calories burned and steps taken
+        const caloriesBurned = Math.max(caloriesBurnedData[caloriesBurnedData.length - 1], 
+            caloriesBurnedData[caloriesBurnedData.length - 1] + Math.floor(Math.random() * 50) + 10);
+        const stepsTaken = Math.max(stepsTakenData[stepsTakenData.length - 1], 
+            stepsTakenData[stepsTakenData.length - 1] + Math.floor(Math.random() * 100) + 10);
+
+        // Update the HTML elements with new values
+        document.getElementById('heartRate').innerText = `${heartRate} bpm`;
+        document.getElementById('bloodPressure').innerText = bloodPressure;
+        document.getElementById('caloriesBurned').innerText = `${caloriesBurned} kcal`;
+        document.getElementById('stepsTaken').innerText = `${stepsTaken} steps`;
+        document.getElementById('sleepDuration').innerText = `${sleepDuration} hrs`;
+        
+        // Update data arrays for chart
+        heartRateData.push(heartRate);
+        bloodPressureData.push(parseInt(bloodPressure.split('/')[0])); // Use systolic for chart
+        caloriesBurnedData.push(caloriesBurned);
+        stepsTakenData.push(stepsTaken);
+        
+        // Keep only the last 10 data points
+        if (heartRateData.length > 10) {
+            heartRateData.shift();
+            bloodPressureData.shift();
+            caloriesBurnedData.shift();
+            stepsTakenData.shift();
+        }
+
+        updateChart();
+    }
+
+    // Chart.js Example for Live Data
+    const ctx = document.getElementById('liveDataChart').getContext('2d');
+    const liveDataChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: Array.from({length: 10}, (_, i) => `Data ${i + 1}`),
+            datasets: [
+                {
+                    label: 'Heart Rate',
+                    data: heartRateData,
+                    backgroundColor: 'rgba(76, 175, 80, 0.2)',
+                    borderColor: 'rgba(76, 175, 80, 1)',
+                    fill: true,
+                    borderWidth: 2
+                },
+                {
+                    label: 'Blood Pressure (Systolic)',
+                    data: bloodPressureData,
+                    backgroundColor: 'rgba(244, 67, 54, 0.2)',
+                    borderColor: 'rgba(244, 67, 54, 1)',
+                    fill: true,
+                    borderWidth: 2
+                },
+                {
+                    label: 'Calories Burned',
+                    data: caloriesBurnedData,
+                    backgroundColor: 'rgba(33, 150, 243, 0.2)',
+                    borderColor: 'rgba(33, 150, 243, 1)',
+                    fill: true,
+                    borderWidth: 2
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    function updateChart() {
+        liveDataChart.data.datasets[0].data = heartRateData;
+        liveDataChart.data.datasets[1].data = bloodPressureData;
+        liveDataChart.data.datasets[2].data = caloriesBurnedData;
+        liveDataChart.update();
+    }
+
+    document.getElementById('refreshDataBtn').addEventListener('click', updateMetrics);
+
+    // Auto refresh every 5 seconds
+    setInterval(updateMetrics, 5000);
+
+    // Initial metrics update
+    updateMetrics();
+</script>
+</body>
+</html>
